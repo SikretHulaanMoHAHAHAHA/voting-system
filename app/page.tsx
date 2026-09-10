@@ -1,8 +1,10 @@
-import { prisma } from "@/lib/prisma"
+import { PrismaClient } from "@prisma/client"
 import { cookies } from "next/headers"
 import { preRegister, login, logout, castVote } from "@/actions/voting"
 import Link from "next/link"
 import Image from "next/image"
+
+const prisma = new PrismaClient()
 
 export default async function Home({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
   const params = await searchParams
