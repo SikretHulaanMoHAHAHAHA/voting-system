@@ -17,13 +17,12 @@ export const metadata: Metadata = {
   description: "Official Voting Portal for San Jose Del Monte | Roblox",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className=" text-slate-900 antialiased">{children}</body>
+    <html lang="en" className={`light ${geistSans.variable} ${geistMono.variable}`} style={{ colorScheme: 'light' }}>
+      <body className="bg-[#fffdf5] text-slate-900 antialiased min-h-screen">
+        {children}
+      </body>
     </html>
   );
 }
