@@ -57,7 +57,6 @@ export function RegistrationForm() {
         /* FIX: The dark overlay now handles the scrolling (overflow-y-auto) with padding on top/bottom */
         <div className="fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-sm overflow-y-auto flex px-4 py-10">
           
-          /* FIX: m-auto forces it to center when there is space, but scroll naturally when there isn't */
           <div className="bg-white rounded-2xl p-5 sm:p-8 max-w-md w-full m-auto shadow-2xl animate-fade-in border-t-8 border-t-blue-700 flex flex-col">
             <h3 className="text-xl font-black text-gray-900 uppercase tracking-tight mb-4">Security & Consent</h3>
             
