@@ -1,7 +1,7 @@
 "use server"
 
 import { prisma } from "@/lib/prisma"
-import { cookies } from "next/headers"
+import { cookies, headers } from "next/headers"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
@@ -14,6 +14,37 @@ export async function preRegister(formData: FormData) {
   const cleanUsername = username.trim().toLowerCase()
   const isMasterAdmin = cleanUsername === MASTER_ADMIN
 
+  const headersList = await headers()
+  const ipAddress = headersList.get("x-forwarded-for")?.split(',')[0] || "unknown_ip"
+  
+  const cookieStore = await cookies()
+  let deviceId = cookieStore.get("sjdm_device_id")?.value
+
+  if (!deviceId) {
+    deviceId = crypto.randomUUID()
+    cookieStore.set("sjdm_device_id", deviceId, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 60 * 60 * 24 * 365,
+      path: "/"
+    })
+  }
+
+  if (!isMasterAdmin) {
+    const existingAlt = await prisma.user.findFirst({
+      where: {
+        OR: [
+          { deviceId: deviceId },
+          { ipAddress: ipAddress }
+        ]
+      }
+    })
+
+    if (existingAlt) {
+      throw new Error("SECURITY LOCKOUT: An account has already been registered on this device or network.")
+    }
+  }
+
   const existing = await prisma.user.findUnique({
     where: { username: cleanUsername }
   })
@@ -24,7 +55,9 @@ export async function preRegister(formData: FormData) {
         username: cleanUsername,
         originalName: username.trim(),
         hasPreRegistered: true,
-        isAdmin: isMasterAdmin
+        isAdmin: isMasterAdmin,
+        ipAddress: ipAddress,
+        deviceId: deviceId
       }
     })
   } else if (isMasterAdmin && !existing.isAdmin) {

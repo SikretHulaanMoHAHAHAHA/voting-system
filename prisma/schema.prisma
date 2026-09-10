@@ -12,9 +12,14 @@ model User {
   id               String   @id @default(cuid())
   username         String   @unique
   originalName     String
+  hasPreRegistered Boolean  @default(false)
   isAdmin          Boolean  @default(false)
-  hasPreRegistered Boolean  @default(true)
+  
+  ipAddress        String?  
+  deviceId         String?  
+
   vote             Vote?
+  createdAt        DateTime @default(now())
 }
 
 model Candidate {

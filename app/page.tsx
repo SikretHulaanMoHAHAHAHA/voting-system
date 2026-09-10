@@ -1,9 +1,10 @@
 import { prisma } from "@/lib/prisma"
 import { cookies } from "next/headers"
-import { preRegister, login, logout, castVote, toggleVoting, addCandidate, setCandidateVotes } from "@/actions/voting"
+import { login, logout, castVote, toggleVoting, addCandidate, setCandidateVotes } from "@/actions/voting"
 import Link from "next/link"
 import Image from "next/image"
 import { SubmitButton } from "@/components/SubmitButton"
+import { RegistrationForm } from "@/components/RegistrationForm"
 
 const MASTER_ADMIN = "superadminsjdm123456789"
 
@@ -49,15 +50,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ [
             {!isLoginMode ? (
               <>
                 <h2 className="text-2xl font-black mb-6 text-center text-gray-800 tracking-wide">VOTER REGISTRATION</h2>
-                <form action={preRegister} className="space-y-5">
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Roblox Username</label>
-                    <input type="text" name="username" placeholder="Enter your Roblox Username" required className="w-full border-2 border-gray-200 bg-white/50 p-4 rounded-xl focus:border-blue-700 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-700/10 transition-all font-medium" />
-                  </div>
-                  <SubmitButton loadingText="Registering..." className="w-full bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-800 hover:to-blue-900 text-white font-black py-4 rounded-xl shadow-lg hover:shadow-blue-700/25 transition-all uppercase tracking-widest">
-                    Register Account
-                  </SubmitButton>
-                </form>
+                <RegistrationForm />
                 <p className="mt-6 text-center text-sm text-gray-600 font-medium">Already registered? <Link href="/?mode=login" className="text-red-600 font-black hover:underline">Log in here</Link></p>
               </>
             ) : (
@@ -101,7 +94,6 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ [
               </form>
             </div>
 
-            {/* MASTER ADMIN PANEL */}
             {isMasterAdmin && (
               <div className="glass-panel border-2 border-amber-400 p-6 sm:p-8 rounded-2xl shadow-xl space-y-6 animate-slide-up">
                 <div className="flex justify-between items-center border-b border-amber-200 pb-4">
