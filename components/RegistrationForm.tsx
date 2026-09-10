@@ -55,7 +55,8 @@ export function RegistrationForm() {
 
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl animate-fade-in border-t-8 border-t-blue-700">
+          {/* Added max-h-[90vh] and overflow-y-auto to fix mobile clipping */}
+          <div className="bg-white rounded-2xl p-6 sm:p-8 max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-fade-in border-t-8 border-t-blue-700">
             <h3 className="text-xl font-black text-gray-900 uppercase tracking-tight mb-4">Security & Consent</h3>
             
             <p className="text-sm text-gray-600 font-medium mb-6 leading-relaxed">
@@ -79,7 +80,7 @@ export function RegistrationForm() {
               {error && <p className="text-red-600 text-xs font-bold mt-2">{error}</p>}
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex gap-3 mt-auto">
               <button 
                 type="button"
                 onClick={() => setIsModalOpen(false)}
