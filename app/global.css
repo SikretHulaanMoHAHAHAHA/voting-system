@@ -25,23 +25,19 @@ body {
 
 /* Philippine-Tinted Glass Panels */
 .glass-panel {
-  /* Faint golden-sun gradient replacing the solid white */
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 251, 235, 0.85) 100%);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  /* Subtle gold border instead of pure white */
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px); /* Reduced from 24px to prevent GPU lag */
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(252, 209, 22, 0.4);
-  /* Blue and Red tinted drop-shadows */
-  box-shadow: 0 20px 25px -5px rgba(0, 56, 168, 0.08), 0 8px 10px -6px rgba(206, 17, 38, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 56, 168, 0.05);
 }
 
 .glass-header {
   background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  /* Blue tinted shadow */
-  box-shadow: 0 4px 15px -3px rgba(0, 56, 168, 0.1);
-  border-bottom: 4px solid #0038a8; /* Official Philippine Blue */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px -2px rgba(0, 56, 168, 0.08);
+  border-bottom: 4px solid #0038a8;
 }
 
 .animate-slide-up {
@@ -64,5 +60,5 @@ body {
 
 @keyframes ambientShift {
   0% { background-position: 0% 0%; }
-  100% { background-position: 50% 50%; }
+  100% { background-position: 20% 20%; }
 }
