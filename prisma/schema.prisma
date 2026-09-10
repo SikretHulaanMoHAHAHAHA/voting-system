@@ -1,0 +1,38 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id               String   @id @default(cuid())
+  username         String   @unique
+  originalName     String
+  isAdmin          Boolean  @default(false)
+  hasPreRegistered Boolean  @default(true)
+  vote             Vote?
+}
+
+model Candidate {
+  id    String @id @default(cuid())
+  name  String
+  votes Int    @default(0)
+  Vote  Vote[]
+}
+
+model Vote {
+  id          String    @id @default(cuid())
+  userId      String    @unique
+  candidateId String
+  user        User      @relation(fields: [userId], references: [id])
+  candidate   Candidate @relation(fields: [candidateId], references: [id])
+}
+
+model SystemState {
+  id           String  @id @default("1")
+  isVotingOpen Boolean @default(false)
+}

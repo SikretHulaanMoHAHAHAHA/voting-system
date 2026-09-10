@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+/* Lock browser color scheme to light mode */
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  /* Warm "Pearl of the Orient" / Sun Yellow base instead of cold slate */
+  background-color: #fffdf5 !important;
+  
+  /* Bolder Ambient Philippine Colors */
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(0, 56, 168, 0.15) 0%, transparent 55%),
+    radial-gradient(circle at 90% 15%, rgba(206, 17, 38, 0.12) 0%, transparent 55%),
+    radial-gradient(circle at 50% 90%, rgba(252, 209, 22, 0.18) 0%, transparent 60%);
+  
+  background-attachment: fixed;
+  background-size: 150% 150%;
+  color: #0f172a !important;
+  min-height: 100vh;
+  animation: ambientShift 12s ease-in-out infinite alternate;
+}
+
+/* Philippine-Tinted Glass Panels */
+.glass-panel {
+  /* Faint golden-sun gradient replacing the solid white */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 251, 235, 0.85) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  /* Subtle gold border instead of pure white */
+  border: 1px solid rgba(252, 209, 22, 0.4);
+  /* Blue and Red tinted drop-shadows */
+  box-shadow: 0 20px 25px -5px rgba(0, 56, 168, 0.08), 0 8px 10px -6px rgba(206, 17, 38, 0.05);
+}
+
+.glass-header {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  /* Blue tinted shadow */
+  box-shadow: 0 4px 15px -3px rgba(0, 56, 168, 0.1);
+  border-bottom: 4px solid #0038a8; /* Official Philippine Blue */
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes ambientShift {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 50% 50%; }
+}
